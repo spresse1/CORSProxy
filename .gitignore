@@ -60,3 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# virtualenv- related
+bin/
+include/
+local/
+pip-selfcheck.json
