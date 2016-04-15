@@ -39,3 +39,7 @@ This module should have a 100% test coverage and tests are set to fail if this i
 ### Modifying tests
 
 All tests are currently located in tests/ and (though untested) any tests using python's unittest module placed in this directory should run.
+
+## CI Status
+
+Travis CI (master): [![Build Status](https://travis-ci.org/spresse1/CORSProxy.svg?branch=master)](https://travis-ci.org/spresse1/CORSProxy)
