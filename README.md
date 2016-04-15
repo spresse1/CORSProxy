@@ -1,5 +1,10 @@
 # CORSProxy
 
+## CI Status
+
+Travis CI (master): [![Build Status](https://travis-ci.org/spresse1/CORSProxy.svg?branch=master)](https://travis-ci.org/spresse1/CORSProxy)
+Codecov.io: [![codecov.io](https://codecov.io/github/spresse1/CORSProxy/coverage.svg?branch=master)](https://codecov.io/github/spresse1/CORSProxy?branch=master)
+
 ## Purpose
 
 1. To proxy API requests.  This API either acts to proxy requests for a web_interface instance on the same host or adds the additional headers necessary for hosts somewhere else to make requests.
@@ -40,6 +45,4 @@ This module should have a 100% test coverage and tests are set to fail if this i
 
 All tests are currently located in tests/ and (though untested) any tests using python's unittest module placed in this directory should run.
 
-## CI Status
 
-Travis CI (master): [![Build Status](https://travis-ci.org/spresse1/CORSProxy.svg?branch=master)](https://travis-ci.org/spresse1/CORSProxy)
