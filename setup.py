@@ -11,11 +11,7 @@ setup(name='Distutils',
 	url='https://github.com/spresse1/CORSProxy',
 	packages=['CORSProxy'],
 	requires=[
-		"WSGIProxy (>=0.2.2)",
-		"coverage (>=4.0.3)",
-		"mock (>=2.0.0)",
-		"tox (>=2.3.1)",
-		"wsgiref (==0.1.2)"
+		"WSGIProxy",
 	],
 	classifiers=[
 		"Development Status :: 3 - Alpha",
@@ -33,5 +29,11 @@ setup(name='Distutils',
 		"Topic :: Software Development :: Libraries",
 	],
 	setup_requires=['pytest-runner', ],
-	tests_require=['pytest', ],
+	tests_require=[
+		'pytest',
+		"coverage",
+		"mock",
+		"tox",
+		"WSGIProxy",
+	],
 )
