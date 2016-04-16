@@ -6,6 +6,7 @@ language: python
 #  - "3.5"
 env:
   - TOXENV=py27
+  - TOXENV=pep8
 install: pip install tox-travis
 script: tox
 before_install:
