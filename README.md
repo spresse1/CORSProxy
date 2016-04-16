@@ -2,8 +2,9 @@
 
 ## CI Status
 
-Travis CI (master): [![Build Status](https://travis-ci.org/spresse1/CORSProxy.svg?branch=master)](https://travis-ci.org/spresse1/CORSProxy)
-Codecov.io: [![codecov.io](https://codecov.io/github/spresse1/CORSProxy/coverage.svg?branch=master)](https://codecov.io/github/spresse1/CORSProxy?branch=master)
+[![Build Status](https://travis-ci.org/spresse1/CORSProxy.svg?branch=master)](https://travis-ci.org/spresse1/CORSProxy)
+[![codecov.io](https://codecov.io/github/spresse1/CORSProxy/coverage.svg?branch=master)](https://codecov.io/github/spresse1/CORSProxy?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/bdc343b447df40d895be50b251fee31e)](https://www.codacy.com/app/steve_7/CORSProxy)
 
 ## Purpose
 
