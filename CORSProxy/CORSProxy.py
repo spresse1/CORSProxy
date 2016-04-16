@@ -1,5 +1,11 @@
 #! /usr/bin/env python
 
+"""
+This module contains a single class - Proxy - which implements proxying of
+requests (and adding CORS headers).  It is intended to run under a WSGI
+webserver.  See class documentation for additional details.
+"""
+
 from wsgiproxy.exactproxy import proxy_exact_request
 from copy import deepcopy
 
