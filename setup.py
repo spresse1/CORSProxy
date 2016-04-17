@@ -3,7 +3,7 @@
 from distutils.core import setup
 from setuptools import setup
 
-setup(name='Distutils',
+setup(name='CORSProxy',
 	version='1.0',
 	description='Utilities to proxy APIs without CORS headers',
 	author='Steven Presser',
