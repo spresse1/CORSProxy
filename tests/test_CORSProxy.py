@@ -187,7 +187,7 @@ class test_CORSProxy(unittest.TestCase):
         target_protocol parsing.
         """
         self.cp = Proxy('localhost', target_protocol="hTTp")
-        res = self.cp(get_default_environ(), self.simulate_start_response)
+        self.cp(get_default_environ(), self.simulate_start_response)
         self.assertEquals(self.response.environ['wsgi.url_scheme'], "http")
 
     def test_bad_url_scheme_from_server(self):
@@ -237,7 +237,7 @@ class test_CORSProxy(unittest.TestCase):
         self.cp = Proxy('localhost')
         env = get_default_environ()
         env['wsgi.url_scheme'] = "https"
-        res = self.cp(env, self.simulate_start_response)
+        self.cp(env, self.simulate_start_response)
         self.assertEquals(self.cp.environ['SERVER_PORT'], "443")
         self.assertEquals(self.response.environ['SERVER_PORT'], "443")
 
