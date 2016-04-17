@@ -226,7 +226,7 @@ class test_CORSProxy(unittest.TestCase):
         Tests that the appropriate port for http is picked if not specified.
         """
         self.cp = Proxy('localhost')
-        res = self.cp(get_default_environ(), self.simulate_start_response)
+        self.cp(get_default_environ(), self.simulate_start_response)
         self.assertEquals(self.cp.environ['SERVER_PORT'], "80")
         self.assertEquals(self.response.environ['SERVER_PORT'], "80")
 
