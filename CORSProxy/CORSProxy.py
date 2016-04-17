@@ -26,6 +26,7 @@ class Proxy:
     headers to the response.
 
     A simple way to run this is (adjusting hosts and ports, of course):
+
     >>> from wsgiref.simple_server import make_server
     >>> myproxy = CORSProxy("localhost",8081,allow_from=True)
     >>> server = make_server('127.0.0.1', 8080, myproxy)
@@ -149,13 +150,16 @@ class Proxy:
             self.environ['SERVER_PORT']
         self.environ['SERVER_NAME'] = self.server_name
 
-        return proxy_exact_request(self.environ, self.my_start_response)
+        return proxy_exact_request(self.environ, self.proxy_start_response)
 
-    def my_start_response(self, status, headers):
+    def proxy_start_response(self, status, headers):
         """
         A wrapper around the default start_response function.  Designed to work
         around limitations of various servers and to massage any headers
         required in the response.
+
+        If you have some special work that needs to be done on the response,
+        override this function.  Please be sure to call the original as well!
         """
         # Start by adding user-requested header
         if self.add_headers:

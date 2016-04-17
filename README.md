@@ -34,6 +34,12 @@ While I HIGHLY recommend setting this up under a proper WSGI server, an extremel
 ```
 which would create a proxy (which does nothing except pass through requests) listening on localhost:8081 and passing requests to localhost:8080.
 
+## Documentation
+To build the documentation, run:
+`tox -e docs`
+
+Currently this only builds html docs.  Other targets can be relatively easily added by modifying tox.ini.
+
 ## Testing
 To test, run either:
 
