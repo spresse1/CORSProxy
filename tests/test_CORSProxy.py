@@ -9,6 +9,17 @@ import mock
 import unittest
 from CORSProxy.CORSProxy import Proxy
 
+banned_headers = [
+      ("Connection", "My-Value"),
+      ("Keep-Alive", "False"),
+      ("Proxy-Authenticate", "Nope"),
+      ("Proxy-Authorization", "Not here"),
+      ('TE', "what"),
+      ('Trailers', "None"),
+      ('Transfer-Encoding', "Nothing"),
+      ('Upgrade', "Dont"),
+    ]
+
 
 class Response:
     """
@@ -247,7 +258,7 @@ class test_CORSProxy(unittest.TestCase):
         the remote API.
         """
         self.cp = Proxy('self.domain')
-        res = self.cp(get_default_environ(), self.simulate_start_response)
+        self.cp(get_default_environ(), self.simulate_start_response)
         self.assertEquals(self.response.environ['SERVER_NAME'], "self.domain")
         self.assertEquals(self.response.environ['HTTP_HOST'], "self.domain:80")
 
@@ -256,7 +267,7 @@ class test_CORSProxy(unittest.TestCase):
         Tests that the Proxy class will not override a user-specified port.
         """
         self.cp = Proxy('localhost', '17')
-        res = self.cp(get_default_environ(), self.simulate_start_response)
+        self.cp(get_default_environ(), self.simulate_start_response)
         self.assertEquals(self.response.environ['HTTP_HOST'], "localhost:17")
         self.assertEquals(self.cp.environ['SERVER_PORT'], "17")
         self.assertEquals(self.response.environ['SERVER_PORT'], "17")
@@ -265,27 +276,17 @@ class test_CORSProxy(unittest.TestCase):
         """
         Tests that user-added headers are sent in the request.
         """
-        hdr = [("X-My-Special-Header", "My-Value")]
-        self.cp = Proxy('localhost', add_headers=hdr)
+        banned_headers = [("X-My-Special-Header", "My-Value")]
+        self.cp = Proxy('localhost', add_headers=banned_headers)
         self.cp(get_default_environ(), self.simulate_start_response)
-        self.assertEquals(hdr, self.response.headers)
+        self.assertEquals(banned_headers, self.response.headers)
 
     def test_remove_bad_headers(self):
         """
         Tests that headers not allowed by the wsgiref server are stripped from
         the response.
         """
-        hdr = [
-            ("Connection", "My-Value"),
-            ("Keep-Alive", "False"),
-            ("Proxy-Authenticate", "Nope"),
-            ("Proxy-Authorization", "Not here"),
-            ('TE', "what"),
-            ('Trailers', "None"),
-            ('Transfer-Encoding', "Nothing"),
-            ('Upgrade', "Dont"),
-        ]
-        self.cp = Proxy('localhost', add_headers=hdr)
+        self.cp = Proxy('localhost', add_headers=banned_headers)
         self.cp(get_default_environ(), self.simulate_start_response)
         self.assertEquals([], self.response.headers)
 
@@ -293,21 +294,11 @@ class test_CORSProxy(unittest.TestCase):
         """
         Tests that headers are not altered if not using the wsgiref server.
         """
-        hdr = [
-            ("Connection", "My-Value"),
-            ("Keep-Alive", "False"),
-            ("Proxy-Authenticate", "Nope"),
-            ("Proxy-Authorization", "Not here"),
-            ('TE', "what"),
-            ('Trailers', "None"),
-            ('Transfer-Encoding', "Nothing"),
-            ('Upgrade', "Dont"),
-        ]
-        self.cp = Proxy('localhost', add_headers=hdr)
+        self.cp = Proxy('localhost', add_headers=banned_headers)
         env = get_default_environ()
         env['SERVER_SOFTWARE'] = "Not wsgiref"
         self.cp(env, self.simulate_start_response)
-        self.assertEquals(hdr, self.response.headers)
+        self.assertEquals(banned_headers, self.response.headers)
 
     def test_added_ACAO_star_no_origin(self):
         """
